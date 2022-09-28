@@ -76,11 +76,21 @@ fun MainScreen(
         Destinations.Pantalla2,
         Destinations.Pantalla3,
         Destinations.PantallaQR,
+        Destinations.Pantalla4,
     )
+
+    val navigationItems2 = listOf(
+        Destinations.Pantalla1,
+        Destinations.Pantalla2,
+        Destinations.Pantalla3,
+        Destinations.PantallaQR,
+        Destinations.Pantalla4,
+    )
+
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = { BottomNavigationBar(navController = navController,
-            items = navigationItems) },
+            items = navigationItems2) },
         floatingActionButton = { FloatingActionButton(onClick = {}) {
             Icon(imageVector = Icons.Default.Add, contentDescription =
             "Fab Icon")

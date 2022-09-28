@@ -19,4 +19,6 @@ sealed class Destinations(
         Icons.Filled.Favorite)
     object PantallaQR: Destinations("pantallaQR", "Pantalla QR",
         Icons.Filled.Deck)
+
+    object Pantalla4: Destinations("pantalla4", "Pantalla 4x", Icons.Filled.Facebook)
 }

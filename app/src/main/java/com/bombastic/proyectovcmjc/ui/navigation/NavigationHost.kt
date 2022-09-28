@@ -9,6 +9,7 @@ import androidx.navigation.compose.navArgument
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla1
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla2
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla3
+import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla4
 import com.bombastic.proyectovcmjc.ui.presentation.screens.PantallaQR as PantallaQR
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
@@ -44,6 +45,10 @@ fun NavigationHost(
         }
         composable(Destinations.PantallaQR.route) {
             PantallaQR()
+        }
+
+        composable(Destinations.Pantalla4.route) {
+            Pantalla4()
         }
 
     }
