@@ -24,8 +24,10 @@ import com.bombastic.proyectovcmjc.ui.presentation.components.TopBar
 import com.bombastic.proyectovcmjc.ui.theme.BLUE800
 import com.bombastic.proyectovcmjc.ui.theme.ProyectoVCMJCTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +79,7 @@ fun MainScreen(
         Destinations.Pantalla3,
         Destinations.PantallaQR,
         Destinations.Pantalla4,
+        Destinations.PersonaUI
     )
 
     val navigationItems2 = listOf(

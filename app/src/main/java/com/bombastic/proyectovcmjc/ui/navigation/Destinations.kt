@@ -21,4 +21,6 @@ sealed class Destinations(
         Icons.Filled.Deck)
 
     object Pantalla4: Destinations("pantalla4", "Pantalla 4x", Icons.Filled.Facebook)
+
+    object PersonaUI: Destinations("personaUI","Adm. Persona", Icons.Filled.Fastfood)
 }

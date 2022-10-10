@@ -5,7 +5,8 @@ import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
+//import androidx.navigation.compose.navArgument
+import androidx.navigation.navArgument
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla1
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla2
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla3
@@ -49,6 +50,10 @@ fun NavigationHost(
 
         composable(Destinations.Pantalla4.route) {
             Pantalla4()
+        }
+
+        composable(Destinations.PersonaUI.route){
+            Destinations.PersonaUI
         }
 
     }

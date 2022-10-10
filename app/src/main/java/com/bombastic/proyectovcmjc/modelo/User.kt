@@ -13,7 +13,7 @@ data class UserResponse(
     var password: String
 )
 
-data class TokenReponse(
+data class  TokenResponse(
     var message: String,
     var token: String
 )
