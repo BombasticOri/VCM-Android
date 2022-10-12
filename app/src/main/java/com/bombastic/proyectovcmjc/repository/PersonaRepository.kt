@@ -7,7 +7,10 @@ import com.bombastic.proyectovcmjc.data.remote.RestDataSource
 import com.bombastic.proyectovcmjc.modelo.Persona
 import com.bombastic.proyectovcmjc.modelo.User
 import com.bombastic.proyectovcmjc.util.TokenUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 interface PersonaRepository {
@@ -18,17 +21,24 @@ interface PersonaRepository {
 class PersonaRepositoryImp @Inject constructor(
     private val dataSource: RestDataSource,
     private val personaDao: PersonaDao
-):PersonaRepository{
-    override suspend fun deletePersona(persona: Persona)=personaDao.eliminarPersona(persona)
-
+):PersonaRepository {
+    override suspend fun deletePersona(persona: Persona) = personaDao.eliminarPersona(persona)
     override fun reportarPersonas(): LiveData<List<Persona>> {
         //delay(3000)
-        val token = dataSource.login(User("asdasd@gmail.com","","123456"))
-        TokenUtils.TOKEN_CONTENT = token.body()?.token_type+" "+token.body()?.acces_token
-        Log.i("VERX","Token:"+TokenUtils.TOKEN_CONTENT)
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(3000)
+                Log.i("VERRX", "Llega aqui!!!")
+                val totek = dataSource.login(User("bombastic@gmail.com", "", "12345678"))
+                TokenUtils.TOKEN_CONTENT = "beader " + totek.token
+                Log.i("VERX", "Token:" + TokenUtils.TOKEN_CONTENT)
 
-        val data = dataSource.reportarPersona(TokenUtils.TOKEN_CONTENT).body()!!.data
-        personaDao.insertarPersona(data)
+                val data = dataSource.reportarPersona(TokenUtils.TOKEN_CONTENT).body()!!.data
+                personaDao.insertarPersona(data)
+            }
+        } catch (e: Exception) {
+            Log.i("ERRORX","ERROR:"+e.message)
+        }
         return personaDao.reportarPersonas()
     }
 }

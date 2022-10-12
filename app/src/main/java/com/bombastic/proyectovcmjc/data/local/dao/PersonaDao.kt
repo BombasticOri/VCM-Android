@@ -12,7 +12,7 @@ interface PersonaDao {
     suspend fun insertarPersona(persona: Persona)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertarPersona(persona: List<Persona>)
+    suspend fun insertarPersona(persona: List<Persona>)
 
     @Update
     suspend fun actualizarPersona(persona: Persona)

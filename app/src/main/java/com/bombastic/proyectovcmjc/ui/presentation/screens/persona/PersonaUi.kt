@@ -12,12 +12,15 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.bombastic.proyectovcmjc.R
 import com.bombastic.proyectovcmjc.modelo.Persona
@@ -129,7 +132,7 @@ fun MyApp(
                         Column(
                             Modifier.weight(1f),
                         ) {
-                            Text("${persona.nombre} ${persona.apellidopaterno}")
+                            Text("${persona.nombre} ${persona.apellido_paterno} ${persona.apellido_materno}")
                             Text(persona.telefono!!)
                         }
                         Spacer()
@@ -152,4 +155,16 @@ fun MyApp(
             }
         }
     }
+}
+
+
+@Composable
+fun PersonaUI (viewModel: PersonaViewModel= hiltViewModel()){
+    val users by viewModel.users.observeAsState(arrayListOf())
+    val isLoading by viewModel.isLoading.observeAsState(false)
+    MyApp(onAddClick = {
+        viewModel.addUser()
+    }, onDeleteClick = {
+        viewModel.deleteUser(it)
+    }, users, isLoading)
 }

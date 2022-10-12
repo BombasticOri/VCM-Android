@@ -1,15 +1,12 @@
 package com.bombastic.proyectovcmjc.data.remote
 
-import com.bombastic.proyectovcmjc.modelo.MsgModelResponse
-import com.bombastic.proyectovcmjc.modelo.Persona
-import com.bombastic.proyectovcmjc.modelo.User
-import com.bombastic.proyectovcmjc.modelo.UserResponse
+import com.bombastic.proyectovcmjc.modelo.*
 import retrofit2.Response
 import retrofit2.http.*
 
 interface RestDataSource {
     @GET("/apiv1/persona")
-    fun reportarPersona(@Header("Authorization") token:String):Response<MsgModelResponse>
+    suspend fun reportarPersona(@Header("Authorization") token:String):Response<MsgModelResponse>
 
     @GET("/apiv1/persona/{id}")
     suspend fun getPersonaId(@Header("Authorization") token:String, @Query("id") id:Int):Response<MsgModelResponse>
@@ -23,7 +20,7 @@ interface RestDataSource {
     @POST("/apiv1/persona")
     suspend fun insertarPersona(@Body persona: Persona):Response<MsgModelResponse>
 
-    @GET("/apiv1/user/login")
-    fun login(@Body user: User):Response<UserResponse>
+    @POST("/apiv1/user/login")
+    suspend fun login(@Body user: User):TokenResponse
 
 }
