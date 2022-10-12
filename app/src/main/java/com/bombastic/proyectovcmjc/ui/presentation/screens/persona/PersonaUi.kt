@@ -134,6 +134,7 @@ fun MyApp(
                         ) {
                             Text("${persona.nombre} ${persona.apellido_paterno} ${persona.apellido_materno}")
                             Text(persona.telefono!!)
+                            Text(persona.genero!!)
                         }
                         Spacer()
                         IconButton(onClick = {

@@ -22,7 +22,12 @@ class PersonaRepositoryImp @Inject constructor(
     private val dataSource: RestDataSource,
     private val personaDao: PersonaDao
 ):PersonaRepository {
-    override suspend fun deletePersona(persona: Persona) = personaDao.eliminarPersona(persona)
+    override suspend fun deletePersona(persona: Persona){
+        CoroutineScope(Dispatchers.IO).launch{
+            dataSource.deletePersona(persona.id)
+        }
+        personaDao.eliminarPersona(persona)
+    }
     override fun reportarPersonas(): LiveData<List<Persona>> {
         //delay(3000)
         try {
