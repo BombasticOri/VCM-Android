@@ -27,6 +27,25 @@ import com.bombastic.proyectovcmjc.modelo.Persona
 import com.valentinilk.shimmer.shimmer
 import com.bombastic.proyectovcmjc.util.TokenUtils
 import com.bombastic.proyectovcmjc.util.isInternetAvailable
+import com.google.gson.Gson
+
+@Composable
+fun PersonaUI (navegarEditarPer: (String) -> Unit,
+               viewModel: PersonaViewModel=hiltViewModel()){
+    val users by viewModel.users.observeAsState(arrayListOf())
+    val isLoading by viewModel.isLoading.observeAsState(false)
+    MyApp(onAddClick = {
+//viewModel.addUser()
+        navegarEditarPer((0).toString())
+    }, onDeleteClick = {
+        viewModel.deleteUser(it)
+    }, users, isLoading,
+        onEditClick = {
+            val jsonString = Gson().toJson(it)
+            navegarEditarPer(jsonString)
+        }
+    )
+}
 
 @Composable
 fun Spacer(size: Int = 8) = Spacer(modifier = Modifier.size(size.dp))
@@ -85,6 +104,7 @@ fun MyApp(
     onDeleteClick: ((toDelete: Persona) -> Unit)? = null,
     personas: List<Persona>,
     isLoading: Boolean,
+    onEditClick: ((toPersona: Persona)->Unit)?=null,
 ) {
     val context = LocalContext.current
     Scaffold(
@@ -148,6 +168,7 @@ fun MyApp(
                             Log.i("VERTOKEN", TokenUtils.TOKEN_CONTENT)
                             var estado= isInternetAvailable(context)
                             Log.i("CONEXION", "VEr: "+estado)
+                            onEditClick?.invoke(persona)
                         }) {
                             Icon(Icons.Filled.Edit, "Editar",tint = Color.Blue)
                         }

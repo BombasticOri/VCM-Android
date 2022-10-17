@@ -16,6 +16,9 @@ import javax.inject.Inject
 interface PersonaRepository {
     suspend fun deletePersona(persona: Persona)
     fun reportarPersonas():LiveData<List<Persona>>
+    fun buscarPersonaId(id:Int):LiveData<Persona>
+    suspend fun insertarPersona(persona:Persona):Boolean
+    suspend fun modificarRemotePersona(persona: Persona) :Boolean
 }
 
 class PersonaRepositoryImp @Inject constructor(
@@ -46,4 +49,26 @@ class PersonaRepositoryImp @Inject constructor(
         }
         return personaDao.reportarPersonas()
     }
+    override fun buscarPersonaId(id:Int): LiveData<Persona> {
+        return personaDao.buscarPersona(id)
+    }
+    override suspend  fun insertarPersona(persona: Persona):Boolean{
+        var dd:Boolean=false
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.i("DATA", "T:"+TokenUtils.TOKEN_CONTENT)
+            Log.i("DATA", "D:"+persona.toString())
+            dd = true
+        }
+        return dd
+    }
+    override suspend fun modificarRemotePersona(persona: Persona):Boolean{
+        var dd:Boolean=false
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.i("DATA", "T:"+TokenUtils.TOKEN_CONTENT)
+            Log.i("DATA", "D:"+persona.toString())
+            dd=true
+        }
+        return dd
+    }
+
 }

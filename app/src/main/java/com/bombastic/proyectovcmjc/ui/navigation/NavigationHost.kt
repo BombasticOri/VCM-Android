@@ -11,6 +11,7 @@ import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla1
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla2
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla3
 import com.bombastic.proyectovcmjc.ui.presentation.screens.Pantalla4
+import com.bombastic.proyectovcmjc.ui.presentation.screens.persona.PersonaForm
 import com.bombastic.proyectovcmjc.ui.presentation.screens.persona.PersonaUI
 import com.bombastic.proyectovcmjc.ui.presentation.screens.PantallaQR as PantallaQR
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -54,8 +55,25 @@ fun NavigationHost(
         }
 
         composable(Destinations.PersonaUI.route){
-            PersonaUI()
+            PersonaUI(navegarEditarPer = { newText ->
+                navController.navigate(Destinations.PersonaForm.passId(newText))
+            }
+            )
         }
+        composable(
+            Destinations.PersonaForm.route,
+            arguments = listOf(navArgument("perId") {
+                defaultValue =
+                    "perId"
+            })
+        ) { navBackStackEntry ->
+            var perId =
+                navBackStackEntry.arguments?.getString("perId")
+            requireNotNull(perId)
+            PersonaForm(perId, darkMode, navController)
+        }
+
+
 
     }
 }
