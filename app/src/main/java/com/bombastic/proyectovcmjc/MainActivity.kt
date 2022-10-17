@@ -23,6 +23,7 @@ import com.bombastic.proyectovcmjc.ui.presentation.components.Drawer
 import com.bombastic.proyectovcmjc.ui.presentation.components.TopBar
 import com.bombastic.proyectovcmjc.ui.theme.BLUE800
 import com.bombastic.proyectovcmjc.ui.theme.ProyectoVCMJCTheme
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -93,14 +94,13 @@ fun MainScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         /*bottomBar = { BottomNavigationBar(navController = navController,
-            items = navigationItems2) },*/
+            items = navigationItems2) },
         floatingActionButton = { FloatingActionButton(onClick = {}) {
             Icon(imageVector = Icons.Default.Add, contentDescription =
             "Fab Icon")
         } },
-        /*
         isFloatingActionButtonDocked = false,
-        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButtonPosition = FabPosition.End, */
         topBar = {
             TopBar(
                 scope,
@@ -125,7 +125,7 @@ fun MainScreen(
                     }
                 }
             )
-        },*/
+        },
         drawerContent = { Drawer(scope, scaffoldState, navController,
             items = navigationItems) },
         drawerGesturesEnabled = true
@@ -134,4 +134,6 @@ fun MainScreen(
     }
     Dialog(showDialog = openDialog.value, dismissDialog = {
         openDialog.value = false })
+
+
 }
