@@ -92,12 +92,13 @@ fun MainScreen(
 
     Scaffold(
         scaffoldState = scaffoldState,
-        bottomBar = { BottomNavigationBar(navController = navController,
-            items = navigationItems2) },
+        /*bottomBar = { BottomNavigationBar(navController = navController,
+            items = navigationItems2) },*/
         floatingActionButton = { FloatingActionButton(onClick = {}) {
             Icon(imageVector = Icons.Default.Add, contentDescription =
             "Fab Icon")
         } },
+        /*
         isFloatingActionButtonDocked = false,
         floatingActionButtonPosition = FabPosition.End,
         topBar = {
@@ -124,7 +125,7 @@ fun MainScreen(
                     }
                 }
             )
-        },
+        },*/
         drawerContent = { Drawer(scope, scaffoldState, navController,
             items = navigationItems) },
         drawerGesturesEnabled = true
